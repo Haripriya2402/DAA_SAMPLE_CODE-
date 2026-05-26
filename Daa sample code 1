@@ -1,0 +1,85 @@
+import time
+
+# ==========================================
+# PATTERN SEARCHING FUNCTION
+# ==========================================
+
+def pattern_search(txt, pat):
+
+    positions = []
+    comparisons = 0
+
+    n = len(txt)
+    m = len(pat)
+
+    start_time = time.perf_counter()
+
+    # Loop through text
+    for i in range(n - m + 1):
+
+        comparisons += 1
+
+        # Compare substring with pattern
+        if txt[i:i + m] == pat:
+            positions.append(i)
+
+    end_time = time.perf_counter()
+
+    execution_time = end_time - start_time
+
+    return positions, comparisons, execution_time
+
+
+# ==========================================
+# MAIN PROGRAM
+# ==========================================
+
+print("=========================================")
+print("PATTERN SEARCHING SYSTEM")
+print("=========================================\n")
+
+# User Input
+txt = input("Enter a Text : ")
+pat = input("Enter a Pattern : ")
+
+# Case Sensitivity Option
+choice = input("Case Sensitive Search? (y/n) : ")
+
+if choice.lower() == 'n':
+    txt = txt.lower()
+    pat = pat.lower()
+
+print("\nSearching Pattern...\n")
+
+# Function Call
+positions, comparisons, execution_time = pattern_search(txt, pat)
+
+# ==========================================
+# OUTPUT RESULTS
+# ==========================================
+
+if len(positions) > 0:
+
+    print("Pattern Found Successfully!\n")
+
+    print(f"Total Matches Found : {len(positions)}")
+
+    print(f"Match Positions     : {positions}")
+
+else:
+
+    print("Pattern Not Found!\n")
+
+print(f"Number of Comparisons : {comparisons}")
+
+print(f"Execution Time       : {execution_time:.8f} seconds")
+
+# ==========================================
+# TIME COMPLEXITY
+# ==========================================
+
+print("\nTime Complexity : O(n*m)")
+
+print("\n=========================================")
+print("PROGRAM COMPLETED")
+print("=========================================")
